@@ -4,7 +4,7 @@ fdump
 [![PyPI version](https://badge.fury.io/py/fdump.svg)](https://badge.fury.io/py/fdump)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Build Status](https://travis-ci.org/nul-one/fdump.png)](https://travis-ci.org/nul-one/fdump)
-[![Requirements Status](https://requires.io/github/nul-one/fdump/requirements.svg?branch=dev)](https://requires.io/github/nul-one/fdump/requirements/?branch=dev)
+[![Requirements Status](https://requires.io/github/nul-one/fdump/requirements.svg?branch=master)](https://requires.io/github/nul-one/fdump/requirements/?branch=master)
 
 Split stdin by lines based on regex and output to stdout or dump to a file.
 
