@@ -3,8 +3,6 @@
 from setuptools import setup, find_packages
 import fdump
 
-print("all good")
-
 setup(
     name = 'fdump',
     description = fdump.__doc__.strip(),
@@ -21,10 +19,6 @@ setup(
         ],
     },
     install_requires = [
-        #'re',
-        #'sys',
-        #'os',
-        #'signal',
     ],
     python_requires=">=3.4.6",
 )

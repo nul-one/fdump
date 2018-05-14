@@ -11,7 +11,6 @@ def signal_handler(signal, frame):
     sys.exit(0)
 
 def usage():
-    app_name = os.path.basename(__file__)
     print("""
     Tool for spliting stream lines based on regular expression matching. Each line from STDIN
     will be sent to dump file if it matches given regular expression and a dump file path is
@@ -20,7 +19,7 @@ def usage():
     output of previous one.
 
     Usage:
-       {0} [OPTIONS]
+       fdump [OPTIONS]
 
     Options:
         -d REGEX [DUMPFILE] -   Lines from STDIN or previous -d/-g that match REGEX will be
@@ -31,7 +30,7 @@ def usage():
         -g REGEX [DUMPFILE] -   Same as -d but inverted: matching regexes are printed or passed
                                 and non matching are dumped to DUMPFILE or /dev/null.
 
-        -p REGEX [OUTPUT]   -   Lines from STDIN or previous -d/-g will be parsed using regex 
+        -p REGEX [OUTPUT]   -   Lines from STDIN or previous -d/-g will be parsed using regex
                                 and the output will be comma separated regex groups, or if
                                 OUTPUT is defined, it will substitute '{{N}}' strings in OUTPUT
                                 with group number N. It will then pass this to next -d/-g or -p
@@ -40,8 +39,8 @@ def usage():
         -h                  -   Show this help and exit.
     
     Example:
-        {0} -g query -d user ~/user_queries.txt -d script ~/script_queries.txt > rest.txt
-    """.format(app_name))
+        <test.log fdump -g ^query -d user user_queries.txt -d admin admin_queries.txt >rest.txt
+    """)
 
 def err_unrecognized_option(opt):
     print("ERROR: Unrecognized option: '{}'.".format(opt))
@@ -53,7 +52,6 @@ def err_invalid_numargs(opt, args=None):
     print(str(opt) + " " + " ".join(args))
     usage()
     sys.exit(1)
-
 
 def get_filters():
     filter_lists = []
@@ -93,7 +91,6 @@ def get_filters():
         filters.append(fltr)
     return filters
 
-
 def fdump(stdin, stdout, filters):
     # convert file names to files
     for fltr in filters:
@@ -132,21 +129,17 @@ def fdump(stdin, stdout, filters):
         if fltr['dumpfile']:
             fltr['dumpfile'].close()
 
-
 def main():
     signal.signal(signal.SIGINT, signal_handler)
     filters = get_filters()
-
     if not len(filters):
         # No filters defined so I will act as a pipe.
         for line in sys.stdin:
             sys.stdout.write(line)
         sys.exit(0)
-
     fdump(sys.stdin, sys.stdout, filters)
     sys.exit(0)
 
 if __name__ == '__main__':
     main()
-
 

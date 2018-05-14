@@ -27,7 +27,7 @@ dump file. Multiple `-d` and `-g` options can be used, each receiving and proces
 output of previous one.
 
 Usage:
-   __main__.py [OPTIONS]
+   fdump [OPTIONS]
 
 Options:
     -d REGEX [DUMPFILE] -   Lines from STDIN or previous -d/-g that match REGEX will be
@@ -38,15 +38,15 @@ Options:
     -g REGEX [DUMPFILE] -   Same as -d but inverted: matching regexes are printed or passed
                             and non matching are dumped to DUMPFILE or /dev/null.
 
-    -p REGEX [OUTPUT]   -   Lines from STDIN or previous -d/-g will be parsed using regex 
+    -p REGEX [OUTPUT]   -   Lines from STDIN or previous -d/-g will be parsed using regex
                             and the output will be comma separated regex groups, or if
-                            OUTPUT is defined, it will substitute '{N}' strings in OUTPUT
+                            OUTPUT is defined, it will substitute '{{N}}' strings in OUTPUT
                             with group number N. It will then pass this to next -d/-g or -p
                             filter or print it to the output.
 
     -h                  -   Show this help and exit.
 
 Example:
-    __main__.py -g query -d user ~/user_queries.txt -d script ~/script_queries.txt > rest.txt
+    <test.log fdump -g ^query -d user user_queries.txt -d admin admin_queries.txt >rest.txt
 ```
 
